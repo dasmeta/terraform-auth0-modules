@@ -7,4 +7,5 @@ module "auth0-tenant" {
   guardian_mfa_page       = each.value.guardian_mfa_page
   default_redirection_uri = each.value.default_redirection_uri
   sandbox_version         = each.value.sandbox_version
+  error_page              = each.value.error_page
 }
