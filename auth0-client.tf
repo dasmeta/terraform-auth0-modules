@@ -8,6 +8,7 @@ locals {
     organization_require_behavior = null
     cross_origin_auth             = "false"
     custom_login_page_on          = "true"
+    custom_login_page             = ""
     token_endpoint_auth_method    = "none"
     grant_types                   = ["client_credentials"]
     token_endpoint_auth_method    = "client_secret_post"
@@ -36,6 +37,7 @@ module "auth0_client" {
   app_type                      = each.value.app_type
   cross_origin_auth             = lookup(each.value, "cross_origin_auth", local.client_defaults.cross_origin_auth)
   custom_login_page_on          = lookup(each.value, "custom_login_page_on", local.client_defaults.custom_login_page_on)
+  custom_login_page             = lookup(each.value, "custom_login_page", local.client_defaults.custom_login_page)
   grant_types                   = lookup(each.value, "grant_types", local.client_defaults.grant_types)
   token_endpoint_auth_method    = lookup(each.value, "token_endpoint_auth_method", local.client_defaults.token_endpoint_auth_method)
   allowed_logout_urls           = lookup(each.value, "allowed_logout_urls", local.client_defaults.allowed_logout_urls)

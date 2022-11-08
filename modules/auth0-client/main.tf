@@ -3,6 +3,7 @@ resource "auth0_client" "my_client" {
   # description                         = var.description
   app_type                            = var.app_type
   custom_login_page_on                = var.custom_login_page_on
+  custom_login_page                   = var.custom_login_page
   is_first_party                      = var.is_first_party
   is_token_endpoint_ip_header_trusted = var.is_trusted_endpoint
   token_endpoint_auth_method          = var.token_endpoint_auth_method
