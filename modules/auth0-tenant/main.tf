@@ -15,7 +15,7 @@ resource "auth0_tenant" "my_tenant" {
   }
 
   dynamic "guardian_mfa_page" {
-    for_each = var.error_page
+    for_each = var.guardian_mfa_page
     content {
       enabled = var.guardian_mfa_page[0].enabled
       html    = var.guardian_mfa_page[0].html
