@@ -28,7 +28,7 @@ variable "email_template" {
   description = "Email template name"
 }
 
-variable "body" {
+variable "body_template" {
   type = string
   description = "Body of the email template."
 }
