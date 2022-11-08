@@ -12,8 +12,8 @@ resource "auth0_email" "amazon_ses_email_provider" {
 }
 
 resource "auth0_email_template" "my_email_template" {
-  cout       = var.create_template ? 1 : 0
-  depends_on = [auth0_email.my_email_provider]
+  count       = var.create_template ? 1 : 0
+  depends_on = [auth0_email.amazon_ses_email_provider]
 
   template                = var.email_template
   body                    = var.body_template
