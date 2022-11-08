@@ -153,3 +153,8 @@ variable "flags" {
     use_scope_descriptions_for_consent     = "false"
   })
 }
+
+variable "default_directory" {
+  type = string
+  default = null
+}

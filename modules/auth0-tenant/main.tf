@@ -1,5 +1,6 @@
 resource "auth0_tenant" "my_tenant" {
   allowed_logout_urls = var.allowed_logout_urls
+  default_directory   = var.default_directory
   # session_lifetime        = var.session_lifetime
   sandbox_version         = var.sandbox_version
   enabled_locales         = var.enabled_locales
