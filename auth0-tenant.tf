@@ -8,4 +8,5 @@ module "auth0-tenant" {
   default_redirection_uri = each.value.default_redirection_uri
   sandbox_version         = each.value.sandbox_version
   error_page              = lookup(each.value, "error_page", [])
+  default_directory       = lookup(each.value, "default_directory", null)
 }

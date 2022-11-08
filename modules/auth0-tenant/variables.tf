@@ -155,6 +155,6 @@ variable "flags" {
 }
 
 variable "default_directory" {
-  type = string
+  type    = string
   default = null
 }
