@@ -1,0 +1,17 @@
+version: 2
+
+updates:
+  - package-ecosystem: "terraform"
+    directory:
+      - /
+      - modules/auth0-action
+      - modules/auth0-api
+      - modules/auth0-auth-db
+      - modules/auth0-auth-google
+      - modules/auth0-client
+      - modules/auth0-email
+      - modules/auth0-org
+      - modules/auth0-role
+      - modules/auth0-tenant
+    schedule:
+      interval: "daily"
