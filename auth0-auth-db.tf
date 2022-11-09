@@ -7,4 +7,5 @@ module "auth0-auth-db" {
   password_history          = lookup(each.value, "password_history", { enable = true, size = 3 })
   password_no_personal_info = lookup(each.value, "password_no_personal_info", true)
   password_dictionary       = lookup(each.value, "password_dictionary", { enable = true, dictionary = [] })
+  brute_force_protection    = lookup(each.value, "brute_force_protection", true)
 }

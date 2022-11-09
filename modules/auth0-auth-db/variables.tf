@@ -16,11 +16,11 @@ variable "password_policy" {
   default     = "good"
 }
 
-# variable "brute_force_protection" {
-#   description = "Indicates whether to enable brute force protection, which will limit the number of signups and failed logins from a suspicious IP address."
-#   type        = bool
-#   default     = true
-# }
+variable "brute_force_protection" {
+  description = "Indicates whether to enable brute force protection, which will limit the number of signups and failed logins from a suspicious IP address."
+  type        = bool
+  default     = true
+}
 
 # variable "enabled_database_customization" {
 #   description = "enabled_database_customization"

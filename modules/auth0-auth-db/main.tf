@@ -4,7 +4,8 @@ resource "auth0_connection" "my-database-connection" {
   # is_domain_connection = var.is_domain_connection
   # enabled_clients = var.enabled_clients
   options {
-    password_policy = var.password_policy
+    password_policy        = var.password_policy
+    brute_force_protection = var.brute_force_protection
 
     password_history {
       enable = var.password_history.enable
@@ -23,7 +24,6 @@ resource "auth0_connection" "my-database-connection" {
     #   allowed_audiences              = []
     #   api_enable_users               = false
     #   auth_params                    = {}
-    #   brute_force_protection         = true
     #   custom_scripts                 = {}
     #   debug                          = false
     #   disable_cache                  = false
