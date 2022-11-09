@@ -25,25 +25,25 @@ resource "auth0_connection" "my-database-connection" {
   #   use_kerberos                   = false
   #   use_wsfed                      = false
   #   waad_common_endpoint           = false
-  #   password_policy                = var.password_policy
+  password_policy = var.password_policy
   #   enabled_database_customization = var.enabled_database_customization
   #   import_mode                    = var.import_mode
   #   requires_username              = var.requires_username
   #   disable_signup                 = var.disable_signup
 
-  #   password_history {
-  #     enable = var.password_history.enable
-  #     size   = var.password_history.size
-  #   }
+  password_history {
+    enable = var.password_history.enable
+    size   = var.password_history.size
+  }
 
-  #   password_no_personal_info {
-  #     enable = var.password_no_personal_info
-  #   }
+  password_no_personal_info {
+    enable = var.password_no_personal_info
+  }
 
-  #   password_dictionary {
-  #     enable     = var.password_dictionary.enable
-  #     dictionary = var.password_dictionary.dictionary
-  #   }
+  password_dictionary {
+    enable     = var.password_dictionary.enable
+    dictionary = var.password_dictionary.dictionary
+  }
 
   #   password_complexity_options {
   #     min_length = var.password_complexity_options

@@ -10,11 +10,11 @@ variable "name" {
 #   default     = true
 # }
 
-# variable "password_policy" {
-#   description = "Indicates level of password strength to enforce during authentication."
-#   type        = string
-#   default     = "good"
-# }
+variable "password_policy" {
+  description = "Indicates level of password strength to enforce during authentication."
+  type        = string
+  default     = "good"
+}
 
 # variable "brute_force_protection" {
 #   description = "Indicates whether to enable brute force protection, which will limit the number of signups and failed logins from a suspicious IP address."
@@ -46,35 +46,35 @@ variable "name" {
 #   default     = false
 # }
 
-# variable "password_history" {
-#   description = "Configuration settings for the password history that is maintained for each user to prevent the reuse of passwords."
-#   type = object({
-#     enable = bool
-#     size   = number
-#   })
-#   default = ({
-#     enable = true
-#     size   = 3
-#   })
-# }
+variable "password_history" {
+  description = "Configuration settings for the password history that is maintained for each user to prevent the reuse of passwords."
+  type = object({
+    enable = bool
+    size   = number
+  })
+  default = ({
+    enable = true
+    size   = 3
+  })
+}
 
-# variable "password_no_personal_info" {
-#   description = "Configuration settings for the password personal info check."
-#   type        = bool
-#   default     = true
-# }
+variable "password_no_personal_info" {
+  description = "Configuration settings for the password personal info check."
+  type        = bool
+  default     = true
+}
 
-# variable "password_dictionary" {
-#   description = "Configuration settings for the password dictionary check."
-#   type = object({
-#     enable     = bool
-#     dictionary = list(string)
-#   })
-#   default = ({
-#     enable     = true
-#     dictionary = ["password", "admin", "1234"]
-#   })
-# }
+variable "password_dictionary" {
+  description = "Configuration settings for the password dictionary check."
+  type = object({
+    enable     = bool
+    dictionary = list(string)
+  })
+  default = ({
+    enable     = true
+    dictionary = []
+  })
+}
 
 # variable "password_complexity_options" {
 #   description = "Configuration settings for password complexity."
