@@ -1,60 +1,55 @@
-module "auth0" {
-  source = "../"
+locals {
+  configs = module.auth0_configs.merged
+}
 
-  auth0-domain        = ""
-  auth0-client-id     = ""
-  auth0-client-secret = ""
+module "auth0_configs" {
+  source  = "Invicton-Labs/deepmerge/null"
+  version = "0.1.5"
+  maps = [
+    local._defaults,
+    local.envs["dev"]
+  ]
+}
+
+module "auth0" {
+  source  = "dasmeta/modules/auth0"
+  version = "1.1.7"
+
+  domain        = "*********"
+  client-id     = "*********"
+  client-secret = "*********"
 
   // Role
-  auth0_role = local.auth0_role
+  roles = [for item in lookup(local.configs, "roles", []) : item]
 
   // Tenant
-  auth0_tenant = local.auth0_tenant
+  tenant = [for item in lookup(local.configs, "tenant", []) : item]
 
   // Api
-  auth0_api = local.auth0_api
+  apis = [for item in lookup(local.configs, "apis", {}) : item]
 
   // Action
-  auth0_action = local.auth0_action
+  actions = [for item in lookup(local.configs, "actions", {}) : item]
 
   // Client
-  auth0_client = local.auth0_client
+  clients = [for item in lookup(local.configs, "clients", {}) : item]
 
   // Client Grant
-  auth0_client_grant = local.auth0_client_grant
-
-  // Org
-  auth0_org = local.auth0_org
-
-  // Prompt
-  auth0_prompt = local.auth0_prompt
-
-  // Trigger Binding
-  auth0_trigger_binding = local.auth0_trigger_binding
-
-  // DB
-  auth0_db_connections = local.auth0_db_connections
-
-  // Gooogle Connections
-  auth0_google = local.auth0_google
+  client_grants = [for item in lookup(local.configs, "client_grants", {}) : item]
 
   // Email
-  auth0_email = local.auth0_email
-}
+  emails = [for item in lookup(local.configs, "emails", []) : item]
 
+  // Org
+  orgs = [for item in lookup(local.configs, "orgs", []) : item]
 
-terraform {
-  required_providers {
-    auth0 = {
-      source  = "auth0/auth0"
-      version = "~> 0.37.1" # Refer to docs for latest version
-    }
-  }
-}
+  // Prompt
+  prompts = [for item in lookup(local.configs, "prompts", []) : item]
 
-provider "auth0" {
-  domain        = "***********"
-  client_id     = "***********"
-  client_secret = "*************"
-  debug         = true
+  // DB
+  db_connections = [for item in lookup(local.configs, "db_connections", []) : item]
+
+  // Gooogle Connections
+  google = [for item in lookup(local.configs, "google", []) : item]
+
 }
