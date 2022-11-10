@@ -1,5 +1,6 @@
 resource "auth0_tenant" "my_tenant" {
   allowed_logout_urls = var.allowed_logout_urls
+  default_directory   = var.default_directory
   # session_lifetime        = var.session_lifetime
   sandbox_version         = var.sandbox_version
   enabled_locales         = var.enabled_locales
@@ -15,7 +16,7 @@ resource "auth0_tenant" "my_tenant" {
   }
 
   dynamic "guardian_mfa_page" {
-    for_each = var.error_page
+    for_each = var.guardian_mfa_page
     content {
       enabled = var.guardian_mfa_page[0].enabled
       html    = var.guardian_mfa_page[0].html

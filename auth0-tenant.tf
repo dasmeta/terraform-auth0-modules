@@ -4,7 +4,9 @@ module "auth0-tenant" {
 
   friendly_name           = each.value.friendly_name
   change_password         = each.value.change_password
-  guardian_mfa_page       = each.value.guardian_mfa_page
+  guardian_mfa_page       = lookup(each.value, "guardian_mfa_page", [])
   default_redirection_uri = each.value.default_redirection_uri
   sandbox_version         = each.value.sandbox_version
+  error_page              = lookup(each.value, "error_page", [])
+  default_directory       = lookup(each.value, "default_directory", null)
 }
