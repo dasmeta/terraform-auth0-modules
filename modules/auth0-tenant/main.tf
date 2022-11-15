@@ -7,6 +7,10 @@ resource "auth0_tenant" "my_tenant" {
   default_redirection_uri = var.default_redirection_uri
   # idle_session_lifetime   = var.idle_session_lifetime
 
+  support_url   = var.support_url
+  support_email = var.support_email
+  fiendly_name  = var.fiendly_name
+
   dynamic "change_password" {
     for_each = var.change_password
     content {
