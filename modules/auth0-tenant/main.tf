@@ -9,7 +9,7 @@ resource "auth0_tenant" "my_tenant" {
 
   support_url   = var.support_url
   support_email = var.support_email
-  fiendly_name  = var.fiendly_name
+  fiendly_name  = var.friendly_name
 
   dynamic "change_password" {
     for_each = var.change_password
