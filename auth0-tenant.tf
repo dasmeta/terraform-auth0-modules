@@ -9,4 +9,6 @@ module "auth0-tenant" {
   sandbox_version         = each.value.sandbox_version
   error_page              = lookup(each.value, "error_page", [])
   default_directory       = lookup(each.value, "default_directory", null)
+  support_email           = lookup(each.value, "support_email", null)
+  support_url             = lookup(each.value, "support_url", null)
 }
