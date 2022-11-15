@@ -7,8 +7,8 @@ terraform {
   }
 }
 
-provider "auth0" {
-  domain        = var.domain
-  client_id     = var.client-id
-  client_secret = var.client-secret
-}
+# provider "auth0" {
+#   domain        = var.domain
+#   client_id     = var.client-id
+#   client_secret = var.client-secret
+# }

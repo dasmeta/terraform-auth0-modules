@@ -102,6 +102,7 @@ variable "universal_login" {
   default = []
 }
 
+# @todo convert flags to variables
 variable "flags" {
   description = "Configuration settings for tenant flags."
   type = object({

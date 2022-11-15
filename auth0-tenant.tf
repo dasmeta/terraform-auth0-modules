@@ -1,14 +1,13 @@
 module "auth0-tenant" {
-  source   = "./modules/auth0-tenant"
-  for_each = { for v in var.tenant : v.friendly_name => v }
+  source = "./modules/auth0-tenant"
 
-  friendly_name           = each.value.friendly_name
-  change_password         = each.value.change_password
-  guardian_mfa_page       = lookup(each.value, "guardian_mfa_page", [])
-  default_redirection_uri = each.value.default_redirection_uri
-  sandbox_version         = each.value.sandbox_version
-  error_page              = lookup(each.value, "error_page", [])
-  default_directory       = lookup(each.value, "default_directory", null)
-  support_email           = lookup(each.value, "support_email", null)
-  support_url             = lookup(each.value, "support_url", null)
+  friendly_name           = var.friendly_name
+  change_password         = var.change_password
+  guardian_mfa_page       = var.guardian_mfa_page
+  default_redirection_uri = var.default_redirection_uri
+  sandbox_version         = var.sandbox_version
+  error_page              = var.error_page
+  default_directory       = var.default_directory
+  support_email           = var.support_email
+  support_url             = var.support_url
 }

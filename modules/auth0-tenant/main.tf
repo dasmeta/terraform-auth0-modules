@@ -1,11 +1,16 @@
-resource "auth0_tenant" "my_tenant" {
+resource "auth0_tenant" "tenant" {
+  friendly_name       = var.friendly_name
   allowed_logout_urls = var.allowed_logout_urls
   default_directory   = var.default_directory
+
   # session_lifetime        = var.session_lifetime
   sandbox_version         = var.sandbox_version
   enabled_locales         = var.enabled_locales
   default_redirection_uri = var.default_redirection_uri
   # idle_session_lifetime   = var.idle_session_lifetime
+
+  support_email = var.support_email
+  support_url   = var.support_url
 
   dynamic "change_password" {
     for_each = var.change_password
