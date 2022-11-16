@@ -100,8 +100,11 @@ variable "db_connections" {
 
 // Auth0 Google
 variable "google" {
-  type        = any
-  default     = []
+  type = any
+  default = [{
+    name            = "google-oauth2"
+    enabled_clients = []
+  }]
   description = "With Auth0, you can define sources of users, otherwise known as connections, which may include identity provider Google  authentication methods."
 }
 
