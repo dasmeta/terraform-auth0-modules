@@ -111,3 +111,15 @@ variable "emails" {
   default     = []
   description = "With Auth0, you can have standard welcome, password reset, and account verification email-based workflows built right into Auth0."
 }
+
+// Users
+
+variable "users" {
+  default = []
+  type = list(object({
+    name     = string
+    email    = string
+    roles    = list(string)
+    password = string
+  }))
+}
