@@ -2,7 +2,7 @@ terraform {
   required_providers {
     auth0 = {
       source  = "auth0/auth0"
-      version = "~> 0.37.1" # Refer to docs for latest version
+      version = "~> 0.40.0" # Refer to docs for latest version
     }
   }
 }
