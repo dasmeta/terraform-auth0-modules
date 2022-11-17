@@ -22,7 +22,7 @@ resource "auth0_organization" "my_organization" {
 }
 
 resource "auth0_organization_connection" "my_org_conn" {
-  for_each = var.connections
+  for_each = toset(var.connections)
 
   organization_id = auth0_organization.my_organization.id
   connection_id   = each.value.connection_id
