@@ -31,13 +31,13 @@ variable "allowed_logout_urls" {
 variable "session_lifetime" {
   description = "Number of hours during which a session will stay valid."
   type        = number
-  default     = 720
+  default     = 12
 }
 
 variable "idle_session_lifetime" {
-  description = "Number of hours during which a session will stay valid."
+  description = "Number of hours during which a session can be inactive before the user must log in again."
   type        = number
-  default     = 720
+  default     = 12
 }
 
 variable "sandbox_version" {
