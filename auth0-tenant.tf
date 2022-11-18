@@ -11,4 +11,8 @@ module "auth0-tenant" {
   default_directory       = lookup(each.value, "default_directory", null)
   support_email           = lookup(each.value, "support_email", null)
   support_url             = lookup(each.value, "support_url", null)
+  session_lifetime        = lookup(each.value, "session_lifetime", null)
+  idle_session_lifetime   = lookup(each.value, "idle_session_lifetime", null)
+  session_cookie          = lookup(each.value, "session_cookie", null)
+  flags                   = lookup(each.value, "flags", {})
 }
