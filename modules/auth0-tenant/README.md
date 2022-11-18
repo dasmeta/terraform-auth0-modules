@@ -30,6 +30,7 @@ module "auth0-tenant" {
   support_url = "http://example.com/support"
   allowed_logout_urls = ["http://example.com/logout"]
   session_lifetime = 720
+  idle_session_lifetime = 720
   sandbox_version = "16"
   enabled_locales = ["en"]
   default_redirection_uri = "https://example.com/login"

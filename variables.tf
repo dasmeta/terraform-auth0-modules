@@ -60,8 +60,8 @@ variable "tenant" {
   default = [{
     friendly_name           = ""
     default_redirection_uri = ""
-    # idle_session_lifetime   = "0"
-    # session_lifetime        = "0"
+    idle_session_lifetime   = "0"
+    session_lifetime        = "0"
 
     change_password = {
       enabled = "true"
