@@ -17,6 +17,7 @@ locals {
       lifetime_in_seconds = "36000"
       secret_encoded      = "false"
     }
+    logo_uri = null
     refresh_token = {
       expiration_type              = "non-expiring"
       idle_token_lifetime          = "2592000"
@@ -29,6 +30,7 @@ locals {
     sso = false
   }
 }
+
 module "auth0_client" {
   source   = "./modules/auth0-client"
   for_each = { for v in var.clients : v.name => v }
@@ -47,6 +49,7 @@ module "auth0_client" {
   web_origins                   = lookup(each.value, "web_origins", local.client_defaults.web_origins)
   organization_usage            = lookup(each.value, "organization_usage", local.client_defaults.organization_usage)
   jwt_configuration             = lookup(each.value, "jwt_configuration", local.client_defaults.jwt_configuration)
+  logo_uri                      = lookup(each.value, "logo_uri", local.client_defaults.logo_uri)
   refresh_token                 = lookup(each.value, "refresh_token", local.client_defaults.refresh_token)
   sso                           = lookup(each.value, "sso", local.client_defaults.sso)
   organization_require_behavior = lookup(each.value, "organization_require_behavior", local.client_defaults.organization_require_behavior)

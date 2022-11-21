@@ -119,6 +119,12 @@ variable "jwt_configuration" {
   })
 }
 
+variable "logo_uri" {
+  description = "URL of the logo for the client. Recommended size is 150px x 150px. If none is set, the default badge for the application type will be shown."
+  type        = string
+  default     = null
+}
+
 variable "refresh_token" {
   description = "Configuration settings for the refresh tokens issued for this client."
   type = object({
