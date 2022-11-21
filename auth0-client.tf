@@ -26,6 +26,7 @@ locals {
       rotation_type                = "non-rotating"
       token_lifetime               = "31557600"
     }
+    sso = false
   }
 }
 module "auth0_client" {
@@ -47,5 +48,6 @@ module "auth0_client" {
   organization_usage            = lookup(each.value, "organization_usage", local.client_defaults.organization_usage)
   jwt_configuration             = lookup(each.value, "jwt_configuration", local.client_defaults.jwt_configuration)
   refresh_token                 = lookup(each.value, "refresh_token", local.client_defaults.refresh_token)
+  sso                           = lookup(each.value, "sso", local.client_defaults.sso)
   organization_require_behavior = lookup(each.value, "organization_require_behavior", local.client_defaults.organization_require_behavior)
 }
