@@ -1,6 +1,12 @@
-variable "enable_ses_email_provider" {
+variable "enable_provider" {
   type    = bool
   default = true
+}
+
+variable "name" {
+  description = "Name of the email provider. Options include mailgun, mandrill, sendgrid, ses, smtp, and sparkpost."
+  type        = string
+  default     = null
 }
 
 variable "default_from_address" {
@@ -13,6 +19,7 @@ variable "credentials" {
     access_key_id     = string
     secret_access_key = string
     region            = string
+    api_key           = string
   })
   description = "Configuration settings for the credentials for the email provider."
 }
@@ -59,7 +66,7 @@ variable "url_lifetime_in_seconds" {
   default = 3600
 }
 
-variable "enbale_teplate" {
+variable "enable_template" {
   type = bool
   default = true
 }
