@@ -12,15 +12,17 @@ resource "auth0_email" "this" {
 }
 
 resource "auth0_email_template" "this" {
-  count       = var.create_template ? 1 : 0
   depends_on = [auth0_email.this]
 
-  template                = var.email_template
-  body                    = var.body_template
-  from                    = var.from
-  result_url              = var.result_url
-  subject                 = var.subject
-  syntax                  = var.syntax
-  url_lifetime_in_seconds = var.url_lifetime_in_seconds
-  enabled                 = var.enable_template
+  for_each = var.templates
+
+  template                  = each.value.template
+  enabled                   = each.value.enabled
+  body                      = each.value.body
+  from                      = each.value.from
+  subject                   = each.value.subject
+  syntax                    = each.value.syntax
+  include_email_in_redirect = each.value.include_email_in_redirect
+  result_url                = each.value.result_url
+  url_lifetime_in_seconds   = each.value.url_lifetime_in_seconds
 }
