@@ -8,7 +8,7 @@ terraform {
   required_providers {
     auth0 = {
       source  = "auth0/auth0"
-      version = "~> 0.34.0"
+      version = "~> 0.40.0"
     }
   }
 }
@@ -29,7 +29,8 @@ module "auth0-tenant" {
   support_email = "support@example.com"
   support_url = "http://example.com/support"
   allowed_logout_urls = ["http://example.com/logout"]
-  session_lifetime = 720
+  session_lifetime = 168
+  idle_session_lifetime = 72
   sandbox_version = "16"
   enabled_locales = ["en"]
   default_redirection_uri = "https://example.com/login"
@@ -121,11 +122,11 @@ No modules.
 | <a name="input_flags"></a> [flags](#input\_flags) | Configuration settings for tenant flags. | <pre>object({<br>    allow_legacy_delegation_grant_types    = bool<br>    allow_legacy_ro_grant_types            = bool<br>    allow_legacy_tokeninfo_endpoint        = bool<br>    dashboard_insights_view                = bool<br>    dashboard_log_streams_next             = bool<br>    disable_clickjack_protection_headers   = bool<br>    disable_fields_map_fix                 = bool<br>    disable_management_api_sms_obfuscation = bool<br>    enable_adfs_waad_email_verification    = bool<br>    enable_apis_section                    = bool<br>    enable_client_connections              = bool<br>    enable_custom_domain_in_emails         = bool<br>    enable_dynamic_client_registration     = bool<br>    enable_idtoken_api2                    = bool<br>    enable_legacy_logs_search_v2           = bool<br>    enable_legacy_profile                  = bool<br>    enable_pipeline2                       = bool<br>    enable_public_signup_user_exists_error = bool<br>    no_disclose_enterprise_connections     = bool<br>    revoke_refresh_token_grant             = bool<br>    universal_login                        = bool<br>    use_scope_descriptions_for_consent     = bool<br>  })</pre> | <pre>{<br>  "allow_legacy_delegation_grant_types": "false",<br>  "allow_legacy_ro_grant_types": "false",<br>  "allow_legacy_tokeninfo_endpoint": "false",<br>  "dashboard_insights_view": "false",<br>  "dashboard_log_streams_next": "false",<br>  "disable_clickjack_protection_headers": "false",<br>  "disable_fields_map_fix": "false",<br>  "disable_management_api_sms_obfuscation": "false",<br>  "enable_adfs_waad_email_verification": "false",<br>  "enable_apis_section": "false",<br>  "enable_client_connections": "false",<br>  "enable_custom_domain_in_emails": "false",<br>  "enable_dynamic_client_registration": "false",<br>  "enable_idtoken_api2": "false",<br>  "enable_legacy_logs_search_v2": "false",<br>  "enable_legacy_profile": "false",<br>  "enable_pipeline2": "false",<br>  "enable_public_signup_user_exists_error": "false",<br>  "no_disclose_enterprise_connections": "false",<br>  "revoke_refresh_token_grant": "false",<br>  "universal_login": "true",<br>  "use_scope_descriptions_for_consent": "false"<br>}</pre> | no |
 | <a name="input_friendly_name"></a> [friendly\_name](#input\_friendly\_name) | Friendly name for the tenant. | `string` | `"Tenant Name"` | no |
 | <a name="input_guardian_mfa_page"></a> [guardian\_mfa\_page](#input\_guardian\_mfa\_page) | Configuration settings for the Guardian MFA page. | <pre>list(object({<br>    enabled = bool<br>    html    = string<br>  }))</pre> | `[]` | no |
-| <a name="input_idle_session_lifetime"></a> [idle\_session\_lifetime](#input\_idle\_session\_lifetime) | Number of hours during which a session will stay valid. | `number` | `720` | no |
+| <a name="input_idle_session_lifetime"></a> [idle\_session\_lifetime](#input\_idle\_session\_lifetime) | Number of hours during which a session can be inactive before the user must log in again. | `number` | `72` | no |
 | <a name="input_picture_url"></a> [picture\_url](#input\_picture\_url) | URL of logo to be shown for the tenant. Recommended size is 150px x 150px. | `string` | `"http://example.com/logo.png"` | no |
 | <a name="input_sandbox_version"></a> [sandbox\_version](#input\_sandbox\_version) | Selected sandbox version for the extensibility environment, which allows you to use custom scripts to extend parts of Auth0's functionality. | `string` | `"12"` | no |
 | <a name="input_session_cookie"></a> [session\_cookie](#input\_session\_cookie) | Alters behavior of tenant's session cookie. | `string` | `"persistent"` | no |
-| <a name="input_session_lifetime"></a> [session\_lifetime](#input\_session\_lifetime) | Number of hours during which a session will stay valid. | `number` | `720` | no |
+| <a name="input_session_lifetime"></a> [session\_lifetime](#input\_session\_lifetime) | Number of hours during which a session will stay valid. | `number` | `168` | no |
 | <a name="input_support_email"></a> [support\_email](#input\_support\_email) | Support email address for authenticating users. | `string` | `null` | no |
 | <a name="input_support_url"></a> [support\_url](#input\_support\_url) | Support URL for authenticating users. | `string` | `null` | no |
 | <a name="input_universal_login"></a> [universal\_login](#input\_universal\_login) | Configuration settings for Universal Login. | <pre>list(object({<br>    colors = object({<br>      primary         = string<br>      page_background = string<br>    })<br>  }))</pre> | `[]` | no |
