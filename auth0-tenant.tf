@@ -4,6 +4,7 @@ module "auth0-tenant" {
 
   friendly_name           = each.value.friendly_name
   allowed_logout_urls     = lookup(each.value, "allowed_logout_urls", null)
+  default_audience        = lookup(each.value, "default_audience", null)
   picture_url             = lookup(each.value, "picture_url", null)
   enabled_locales         = lookup(each.value, "enabled_locales", null)
   change_password         = each.value.change_password

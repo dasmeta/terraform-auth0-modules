@@ -1,3 +1,9 @@
+variable "default_audience" {
+  description = "API Audience to use by default for API Authorization flows. This setting is equivalent to appending the audience to every authorization request made to the tenant for every application."
+  type        = string
+  default     = null
+}
+
 variable "friendly_name" {
   description = "Friendly name for the tenant."
   type        = string
