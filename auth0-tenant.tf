@@ -4,6 +4,7 @@ module "auth0-tenant" {
 
   friendly_name           = each.value.friendly_name
   picture_url             = lookup(each.value, "picture_url", null)
+  enabled_locales         = lookup(each.value, "enabled_locales", null)
   change_password         = each.value.change_password
   guardian_mfa_page       = lookup(each.value, "guardian_mfa_page", [])
   default_redirection_uri = each.value.default_redirection_uri
