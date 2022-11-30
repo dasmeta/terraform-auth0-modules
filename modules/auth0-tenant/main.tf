@@ -1,4 +1,5 @@
 resource "auth0_tenant" "my_tenant" {
+  picture_url         = var.picture_url
   allowed_logout_urls = var.allowed_logout_urls
   default_directory   = var.default_directory
   # session_lifetime        = var.session_lifetime
