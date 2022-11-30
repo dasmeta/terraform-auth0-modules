@@ -36,4 +36,5 @@ resource "auth0_client" "my_client" {
 
   sso          = var.sso
   sso_disabled = var.sso_disabled
+  logo_uri     = var.logo_uri
 }
