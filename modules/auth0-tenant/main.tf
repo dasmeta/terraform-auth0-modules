@@ -1,4 +1,6 @@
 resource "auth0_tenant" "my_tenant" {
+  default_audience    = var.default_audience
+  picture_url         = var.picture_url
   allowed_logout_urls = var.allowed_logout_urls
   default_directory   = var.default_directory
   session_lifetime        = var.session_lifetime
@@ -51,8 +53,8 @@ resource "auth0_tenant" "my_tenant" {
     for_each = var.universal_login
     content {
       colors {
-        primary         = var.universal_login.colors.primary
-        page_background = var.universal_login.colors.primary
+        primary         = var.universal_login[0].colors.primary
+        page_background = var.universal_login[0].colors.page_background
       }
     }
   }

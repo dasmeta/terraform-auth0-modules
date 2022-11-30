@@ -1,6 +1,12 @@
-variable "enable_ses_email_provider" {
+variable "enable_provider" {
   type    = bool
   default = true
+}
+
+variable "name" {
+  description = "Name of the email provider. Options include mailgun, mandrill, sendgrid, ses, smtp, and sparkpost."
+  type        = string
+  default     = null
 }
 
 variable "default_from_address" {
@@ -13,53 +19,22 @@ variable "credentials" {
     access_key_id     = string
     secret_access_key = string
     region            = string
+    api_key           = string
   })
   description = "Configuration settings for the credentials for the email provider."
 }
 
-// Template
-variable "create_template" {
-  type = bool
-  default = false
-}
-
-variable "email_template" {
-  type = string
-  description = "Email template name"
-}
-
-variable "body_template" {
-  type = string
-  description = "Body of the email template."
-}
-
-variable "from" {
-  type = string
-  description = "Email address to use as the sender."
-}
-
-variable "result_url" {
-    type = string
-    description = "URL to redirect the user to after a successful action"
-}
-
-variable "subject" {
-  type = string
-  description = "Subject line of the email"
-}
-
-variable "syntax" {
-  type = string
-  default = "liquid"
-  description = "Syntax of the template body"
-}
-
-variable "url_lifetime_in_seconds" {
-  type = number
-  default = 3600
-}
-
-variable "enbale_teplate" {
-  type = bool
-  default = true
+variable "templates" {
+  type = map(object({
+    template                  = string
+    enabled                   = bool
+    body                      = string
+    from                      = string
+    subject                   = string
+    syntax                    = string
+    include_email_in_redirect = optional(bool)
+    result_url                = optional(string)
+    url_lifetime_in_seconds   = optional(number)
+  }))
+  description = "Configuration for email templates."
 }
