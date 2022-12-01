@@ -8,7 +8,7 @@ locals {
     organization_require_behavior = null
     cross_origin_auth             = "false"
     custom_login_page_on          = "true"
-    custom_login_page             = ""
+    custom_login_page             = null
     token_endpoint_auth_method    = "none"
     grant_types                   = ["client_credentials"]
     token_endpoint_auth_method    = "client_secret_post"
