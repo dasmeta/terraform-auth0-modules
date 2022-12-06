@@ -25,16 +25,17 @@ variable "credentials" {
 }
 
 variable "templates" {
-  type = map(object({
-    template                  = string
-    enabled                   = bool
-    body                      = string
-    from                      = string
-    subject                   = string
-    syntax                    = string
-    include_email_in_redirect = optional(bool)
-    result_url                = optional(string)
-    url_lifetime_in_seconds   = optional(number)
-  }))
+  # type = map(object({
+  #   template                  = string
+  #   enabled                   = bool
+  #   body                      = string
+  #   from                      = string
+  #   subject                   = string
+  #   syntax                    = string
+  #   include_email_in_redirect = optional(bool)
+  #   result_url                = optional(string)
+  #   url_lifetime_in_seconds   = optional(number)
+  # }))
+  type        = any
   description = "Configuration for email templates."
 }
