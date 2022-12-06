@@ -1,6 +1,6 @@
 module "auth0-email" {
   source   = "./modules/auth0-email"
-  for_each = { for v in var.emails : v.name => v }
+  for_each = { for k, v in var.emails : k => v }
 
   # auth0_email resource
   name                 = each.value.name
@@ -13,5 +13,5 @@ module "auth0-email" {
   }
 
   # auth0_email_template resource
-  templates = lookup(each.value, "templates", {})
+  templates = lookup(each.value, "email_template", {})
 }
