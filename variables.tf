@@ -123,3 +123,9 @@ variable "users" {
     password = string
   }))
 }
+
+// MFA
+variable "mfa" {
+  default     = []
+  description = "Multi-Factor Authentication works by requiring additional factors during the login process to prevent unauthorized access."
+}
