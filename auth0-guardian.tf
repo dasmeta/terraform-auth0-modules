@@ -35,8 +35,8 @@ module "auth0-guardian" {
   phone = [{
     provider             = lookup(each.value, "provider", local.mfa_defaults.provider)
     message_types        = lookup(each.value, "message_types", local.mfa_defaults.message_types)
-    enrollment_message   = lookup(each.value, "message_types", local.mfa_defaults.enrollment_message)
-    verification_message = lookup(each.value, "message_types", local.mfa_defaults.verification_message)
+    enrollment_message   = lookup(each.value, "enrollment_message", local.mfa_defaults.enrollment_message)
+    verification_message = lookup(each.value, "verification_message", local.mfa_defaults.verification_message)
   }]
 
   push = [{
