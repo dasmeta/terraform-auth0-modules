@@ -6,25 +6,25 @@ variable "policy" {
 
 variable "email" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "otp" {
   type        = bool
-  default     = true
+  default     = false
   description = "Indicates whether one time password MFA is enabled."
 }
 
 variable "recovery_code" {
   type        = bool
-  default     = true
+  default     = false
   description = "Indicates whether recovery code MFA is enabled."
 }
 
 // Webauthn Roaming
-variable "user_verification" {
-  type    = string
-  default = "required"
+variable "webauthn_roaming" {
+  type    = list(any)
+  default = []
 }
 
 variable "phone" {
@@ -40,7 +40,7 @@ variable "push" {
 }
 
 variable "duo" {
-  type        = list(any)
-  default     = []
+  type        = any
+  default     = {}
   description = "[{hostname = '', integration_key = '', secret_key = '' }]"
 }

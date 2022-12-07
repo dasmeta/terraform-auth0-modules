@@ -4,10 +4,11 @@ resource "auth0_guardian" "my_guardian" {
   otp           = var.otp
   recovery_code = var.recovery_code
 
-  #   webauthn_platform {} # This will enable it. Removing this block will disable it.
-
-  webauthn_roaming {
-    user_verification = var.user_verification
+  dynamic "webauthn_roaming" {
+    for_each = var.webauthn_roaming
+    content {
+      user_verification = webauthn_roaming.value["user_verification"]
+    }
   }
 
   dynamic "phone" {
