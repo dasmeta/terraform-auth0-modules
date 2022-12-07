@@ -52,4 +52,9 @@ module "auth0" {
   // Gooogle Connections
   google = [for item in lookup(local.configs, "google", []) : item]
 
+  // Guardian
+  mfa = [for item in lookup(local.configs, "mfa", []) : item]
+
+  // Users
+  users = [for item in lookup(local.configs, "users", []) : item]
 }
