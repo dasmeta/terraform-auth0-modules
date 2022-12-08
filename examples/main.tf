@@ -12,9 +12,9 @@ module "auth0_configs" {
 }
 
 module "auth0" {
-  source  = "dasmeta/modules/auth0"
-  version = "1.1.7"
-
+  # source  = "dasmeta/modules/auth0"
+  # version = "1.1.7"
+  source        = "../"
   domain        = "*********"
   client-id     = "*********"
   client-secret = "*********"

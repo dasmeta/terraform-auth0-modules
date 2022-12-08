@@ -44,6 +44,8 @@ locals {
             subject                   = "Welcome to DasMeta "
             syntax                    = "liquid"
             include_email_in_redirect = false
+            body                      = "Email template" //file("${path.module}/email-templates/change_password.liquid")
+            result_url                = "https://frontend-dev.int.corify.app/"
           }
         }
       },
@@ -78,7 +80,6 @@ locals {
         enforce_policies = "true"
         token_dialect    = "access_token_authz"
         identifier       = "https://test"
-
         scopes = [{
           description = "Permission for  admin users"
           value       = "admin"
