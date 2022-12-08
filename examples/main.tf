@@ -12,9 +12,9 @@ module "auth0_configs" {
 }
 
 module "auth0" {
-  source  = "dasmeta/modules/auth0"
-  version = "1.1.7"
-
+  # source  = "dasmeta/modules/auth0"
+  # version = "1.1.7"
+  source        = "../"
   domain        = "*********"
   client-id     = "*********"
   client-secret = "*********"
@@ -52,4 +52,9 @@ module "auth0" {
   // Gooogle Connections
   google = [for item in lookup(local.configs, "google", []) : item]
 
+  // Guardian
+  mfa = [for item in lookup(local.configs, "mfa", []) : item]
+
+  // Users
+  users = [for item in lookup(local.configs, "users", []) : item]
 }
