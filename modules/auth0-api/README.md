@@ -39,13 +39,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.37.1 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.40.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.37.1 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.40.0 |
 
 ## Modules
 

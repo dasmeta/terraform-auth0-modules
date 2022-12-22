@@ -101,13 +101,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.37.1 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.40.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.37.1 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.40.0 |
 
 ## Modules
 
@@ -136,6 +136,7 @@ No modules.
 | <a name="input_is_first_party"></a> [is\_first\_party](#input\_is\_first\_party) | Indicates whether this client is a first-party client | `bool` | `true` | no |
 | <a name="input_is_trusted_endpoint"></a> [is\_trusted\_endpoint](#input\_is\_trusted\_endpoint) | Indicates whether the token endpoint IP header is trusted. | `bool` | `false` | no |
 | <a name="input_jwt_configuration"></a> [jwt\_configuration](#input\_jwt\_configuration) | Configuration settings for the JWTs issued for this client. | <pre>object({<br>    lifetime_in_seconds = number<br>    secret_encoded      = bool<br>    alg                 = string<br>  })</pre> | <pre>{<br>  "alg": "RS256",<br>  "lifetime_in_seconds": 3600,<br>  "secret_encoded": false<br>}</pre> | no |
+| <a name="input_logo_uri"></a> [logo\_uri](#input\_logo\_uri) | URL of the logo for the client. Recommended size is 150px x 150px. If none is set, the default badge for the application type will be shown. | `string` | `null` | no |
 | <a name="input_oidc_conformant"></a> [oidc\_conformant](#input\_oidc\_conformant) | Indicates whether this client will conform to strict OIDC specifications. | `bool` | `true` | no |
 | <a name="input_organization_require_behavior"></a> [organization\_require\_behavior](#input\_organization\_require\_behavior) | Defines how to proceed during an authentication transaction. | `string` | `null` | no |
 | <a name="input_organization_usage"></a> [organization\_usage](#input\_organization\_usage) | Defines how to sproceed during an authentication transaction with regards to an organization. | `string` | `null` | no |
@@ -153,4 +154,5 @@ No modules.
 | <a name="output_app_name"></a> [app\_name](#output\_app\_name) | n/a |
 | <a name="output_app_type"></a> [app\_type](#output\_app\_type) | n/a |
 | <a name="output_client_id"></a> [client\_id](#output\_client\_id) | n/a |
+| <a name="output_client_secret"></a> [client\_secret](#output\_client\_secret) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

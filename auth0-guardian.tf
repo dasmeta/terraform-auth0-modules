@@ -11,4 +11,3 @@ module "auth0-guardian" {
   push             = each.value.push
   duo              = each.value.duo
 }
-
