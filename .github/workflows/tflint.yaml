@@ -27,7 +27,7 @@ jobs:
           - modules/auth0-org
           - modules/auth0-role
           - modules/auth0-tenant
-     
+
     steps:
     - uses: dasmeta/reusable-actions-workflows/tflint@main
       with:

@@ -92,13 +92,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.37.1 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~>0.40.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.37.1 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~>0.40.0 |
 
 ## Modules
 
@@ -116,6 +116,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_logout_urls"></a> [allowed\_logout\_urls](#input\_allowed\_logout\_urls) | URLs that Auth0 may redirect to after logout. | `list(string)` | `[]` | no |
 | <a name="input_change_password"></a> [change\_password](#input\_change\_password) | Password change configuration | <pre>list(object({<br>    enabled = bool<br>    html    = string<br>  }))</pre> | `[]` | no |
+| <a name="input_default_audience"></a> [default\_audience](#input\_default\_audience) | API Audience to use by default for API Authorization flows. This setting is equivalent to appending the audience to every authorization request made to the tenant for every application. | `string` | `null` | no |
+| <a name="input_default_directory"></a> [default\_directory](#input\_default\_directory) | n/a | `string` | `null` | no |
 | <a name="input_default_redirection_uri"></a> [default\_redirection\_uri](#input\_default\_redirection\_uri) | The default absolute redirection URI, must be https and cannot contain a fragment. | `string` | `"https://example.com/login"` | no |
 | <a name="input_enabled_locales"></a> [enabled\_locales](#input\_enabled\_locales) | Supported locales for the user interface. | `list(string)` | <pre>[<br>  "en"<br>]</pre> | no |
 | <a name="input_error_page"></a> [error\_page](#input\_error\_page) | Configuration settings for error pages. | <pre>list(object({<br>    html          = string<br>    show_log_link = bool<br>    url           = string<br>  }))</pre> | `[]` | no |

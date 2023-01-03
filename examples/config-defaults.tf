@@ -110,7 +110,7 @@ locals {
         // Provide a unique code that allows users to regain access to their account.
         recovery_code = false
 
-        // Webauthn_roaming 
+        // Webauthn_roaming
         webauthn_roaming = [{
           user_verification = "required"
         }]
@@ -124,7 +124,7 @@ locals {
           verification_message = "Verification code"
         }]
 
-        // Push 
+        // Push
         // Provide a push notification using Auth0 Guardian.
         push = [{
           aws_region                        = "eu-central-1"
