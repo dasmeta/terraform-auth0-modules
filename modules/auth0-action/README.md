@@ -38,13 +38,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -61,12 +61,12 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_code"></a> [code](#input\_code) | n/a | `string` | n/a | yes |
-| <a name="input_dependencies"></a> [dependencies](#input\_dependencies) | n/a | <pre>list(object({<br>    name    = string<br>    version = string<br>  }))</pre> | `[]` | no |
+| <a name="input_dependencies"></a> [dependencies](#input\_dependencies) | n/a | <pre>list(object({<br/>    name    = string<br/>    version = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_deploy"></a> [deploy](#input\_deploy) | n/a | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"Action"` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | n/a | `string` | `"node16"` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | Some actions may require secrets to run. Secrets can be passed in a key,value format. | `map(string)` | `{}` | no |
-| <a name="input_supported_triggers"></a> [supported\_triggers](#input\_supported\_triggers) | n/a | <pre>object({<br>    id      = string<br>    version = string<br>  })</pre> | <pre>{<br>  "id": "post-login",<br>  "version": "v3"<br>}</pre> | no |
+| <a name="input_supported_triggers"></a> [supported\_triggers](#input\_supported\_triggers) | n/a | <pre>object({<br/>    id      = string<br/>    version = string<br/>  })</pre> | <pre>{<br/>  "id": "post-login",<br/>  "version": "v3"<br/>}</pre> | no |
 
 ## Outputs
 

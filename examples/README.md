@@ -5,7 +5,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 

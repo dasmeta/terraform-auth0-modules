@@ -5,13 +5,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -28,7 +28,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_credentials"></a> [credentials](#input\_credentials) | Configuration settings for the credentials for the email provider. | <pre>object({<br>    access_key_id     = string<br>    secret_access_key = string<br>    region            = string<br>    api_key           = string<br>  })</pre> | n/a | yes |
+| <a name="input_credentials"></a> [credentials](#input\_credentials) | Configuration settings for the credentials for the email provider. | <pre>object({<br/>    access_key_id     = string<br/>    secret_access_key = string<br/>    region            = string<br/>    api_key           = string<br/>  })</pre> | n/a | yes |
 | <a name="input_default_from_address"></a> [default\_from\_address](#input\_default\_from\_address) | Default from address for emails | `string` | n/a | yes |
 | <a name="input_enable_provider"></a> [enable\_provider](#input\_enable\_provider) | n/a | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the email provider. Options include mailgun, mandrill, sendgrid, ses, smtp, and sparkpost. | `string` | `null` | no |

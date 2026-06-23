@@ -39,13 +39,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -66,7 +66,7 @@ No modules.
 | <a name="input_enforce_policies"></a> [enforce\_policies](#input\_enforce\_policies) | Indicates whether authorization polices are enforced. | `bool` | `true` | no |
 | <a name="input_identifier"></a> [identifier](#input\_identifier) | Unique identifier for the resource server. | `string` | `"my-resource-server-identifier"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Friendly name for the resource server. | `string` | `"My Resource Server (Managed by Terraform)"` | no |
-| <a name="input_scopes"></a> [scopes](#input\_scopes) | List of permissions (scopes) used by this resource server. | <pre>list(object({<br>    value       = string<br>    description = string<br>  }))</pre> | <pre>[<br>  {<br>    "description": "read something",<br>    "value": "read:something"<br>  }<br>]</pre> | no |
+| <a name="input_scopes"></a> [scopes](#input\_scopes) | List of permissions (scopes) used by this resource server. | <pre>list(object({<br/>    value       = string<br/>    description = string<br/>  }))</pre> | <pre>[<br/>  {<br/>    "description": "read something",<br/>    "value": "read:something"<br/>  }<br/>]</pre> | no |
 | <a name="input_signing_alg"></a> [signing\_alg](#input\_signing\_alg) | Algorithm used to sign JWTs. | `string` | `"RS256"` | no |
 | <a name="input_skip_consent_for_verifiable_first_party_clients"></a> [skip\_consent\_for\_verifiable\_first\_party\_clients](#input\_skip\_consent\_for\_verifiable\_first\_party\_clients) | Indicates whether to skip user consent for applications flagged as first party. | `bool` | `true` | no |
 | <a name="input_token_dialect"></a> [token\_dialect](#input\_token\_dialect) | Dialect of access tokens that should be issued for this resource server. Options include access\_token or access\_token\_authz (includes permissions). | `string` | `null` | no |

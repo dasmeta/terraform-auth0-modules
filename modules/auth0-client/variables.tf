@@ -140,6 +140,12 @@ variable "refresh_token" {
   })
 }
 
+variable "token_endpoint_auth_method" {
+  description = "Defines the requested authentication method for the token endpoint."
+  type        = string
+  default     = "client_secret_post"
+}
+
 variable "sso" {
   description = "Applies only to SSO clients and determines whether Auth0 will handle Single Sign-On (true) or whether the identity provider will (false)."
   type        = bool
