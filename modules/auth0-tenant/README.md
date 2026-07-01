@@ -131,6 +131,7 @@ No modules.
 | <a name="input_sandbox_version"></a> [sandbox\_version](#input\_sandbox\_version) | Selected sandbox version for the extensibility environment, which allows you to use custom scripts to extend parts of Auth0's functionality. | `string` | `"12"` | no |
 | <a name="input_session_cookie"></a> [session\_cookie](#input\_session\_cookie) | Alters behavior of tenant's session cookie. | `string` | `"persistent"` | no |
 | <a name="input_session_lifetime"></a> [session\_lifetime](#input\_session\_lifetime) | Number of hours during which a session will stay valid. | `number` | `168` | no |
+| <a name="input_skip_non_verifiable_callback_uri_confirmation_prompt"></a> [skip\_non\_verifiable\_callback\_uri\_confirmation\_prompt](#input\_skip\_non\_verifiable\_callback\_uri\_confirmation\_prompt) | Indicates whether to skip confirmation prompts for non-verifiable callback URIs. | `string` | `null` | no |
 | <a name="input_support_email"></a> [support\_email](#input\_support\_email) | Support email address for authenticating users. | `string` | `null` | no |
 | <a name="input_support_url"></a> [support\_url](#input\_support\_url) | Support URL for authenticating users. | `string` | `null` | no |
 | <a name="input_universal_login"></a> [universal\_login](#input\_universal\_login) | Configuration settings for Universal Login. | <pre>list(object({<br/>    colors = object({<br/>      primary         = string<br/>      page_background = string<br/>    })<br/>  }))</pre> | `[]` | no |

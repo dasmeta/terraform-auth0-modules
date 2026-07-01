@@ -97,6 +97,12 @@ variable "session_cookie" {
   default     = "persistent"
 }
 
+variable "skip_non_verifiable_callback_uri_confirmation_prompt" {
+  description = "Indicates whether to skip confirmation prompts for non-verifiable callback URIs."
+  type        = string
+  default     = null
+}
+
 variable "universal_login" {
   description = "Configuration settings for Universal Login."
   type = list(object({

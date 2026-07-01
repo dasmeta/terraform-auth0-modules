@@ -1,13 +1,14 @@
 resource "auth0_tenant" "my_tenant" {
-  default_audience        = var.default_audience
-  picture_url             = var.picture_url
-  allowed_logout_urls     = var.allowed_logout_urls
-  default_directory       = var.default_directory
-  session_lifetime        = var.session_lifetime
-  sandbox_version         = var.sandbox_version
-  enabled_locales         = var.enabled_locales
-  default_redirection_uri = var.default_redirection_uri
-  idle_session_lifetime   = var.idle_session_lifetime
+  default_audience                                     = var.default_audience
+  picture_url                                          = var.picture_url
+  allowed_logout_urls                                  = var.allowed_logout_urls
+  default_directory                                    = var.default_directory
+  session_lifetime                                     = var.session_lifetime
+  sandbox_version                                      = var.sandbox_version
+  enabled_locales                                      = var.enabled_locales
+  default_redirection_uri                              = var.default_redirection_uri
+  idle_session_lifetime                                = var.idle_session_lifetime
+  skip_non_verifiable_callback_uri_confirmation_prompt = var.skip_non_verifiable_callback_uri_confirmation_prompt
 
   support_url   = var.support_url
   support_email = var.support_email
