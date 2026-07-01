@@ -152,6 +152,12 @@ variable "sso" {
   default     = false
 }
 
+variable "skip_non_verifiable_callback_uri_confirmation_prompt" {
+  description = "Indicates whether to skip confirmation prompts for non-verifiable callback URIs."
+  type        = string
+  default     = null
+}
+
 variable "sso_disabled" {
   description = "Indicates whether or not SSO is disabled."
   type        = bool
