@@ -28,13 +28,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -50,11 +50,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allowed_audiences"></a> [allowed\_audiences](#input\_allowed\_audiences) | List of allowed audiences. | `list(string)` | <pre>[<br>  "example.com",<br>  "api.example.com"<br>]</pre> | no |
+| <a name="input_allowed_audiences"></a> [allowed\_audiences](#input\_allowed\_audiences) | List of allowed audiences. | `list(string)` | <pre>[<br/>  "example.com",<br/>  "api.example.com"<br/>]</pre> | no |
 | <a name="input_enabled_clients"></a> [enabled\_clients](#input\_enabled\_clients) | IDs of the clients for which the connection is enabled. | `list(string)` | `[]` | no |
 | <a name="input_is_domain_connection"></a> [is\_domain\_connection](#input\_is\_domain\_connection) | n/a | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the connection. | `string` | `"Google-OAuth2-Connection"` | no |
-| <a name="input_scopes"></a> [scopes](#input\_scopes) | Permissions to grant to the connection. | `list(string)` | <pre>[<br>  "email",<br>  "profile",<br>  "gmail",<br>  "youtube"<br>]</pre> | no |
+| <a name="input_scopes"></a> [scopes](#input\_scopes) | Permissions to grant to the connection. | `list(string)` | <pre>[<br/>  "email",<br/>  "profile",<br/>  "gmail",<br/>  "youtube"<br/>]</pre> | no |
 | <a name="input_set_user_root_attributes"></a> [set\_user\_root\_attributes](#input\_set\_user\_root\_attributes) | Determines whether the 'name', 'given\_name', 'family\_name', 'nickname', and 'picture' attributes can be independently updated when using an external IdP. | `string` | `"on_each_login"` | no |
 
 ## Outputs

@@ -64,13 +64,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -87,8 +87,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_branding"></a> [branding](#input\_branding) | Defines how to style the login pages. | <pre>list(object({<br>    logo_url = string<br>    colors = object({<br>      primary         = string<br>      page_background = string<br>    })<br>  }))</pre> | `[]` | no |
-| <a name="input_connections"></a> [connections](#input\_connections) | Connections configuration for organization. | <pre>list(object({<br>    connection_id = string<br>  }))</pre> | `[]` | no |
+| <a name="input_branding"></a> [branding](#input\_branding) | Defines how to style the login pages. | <pre>list(object({<br/>    logo_url = string<br/>    colors = object({<br/>      primary         = string<br/>      page_background = string<br/>    })<br/>  }))</pre> | `[]` | no |
+| <a name="input_connections"></a> [connections](#input\_connections) | Connections configuration for organization. | <pre>list(object({<br/>    connection_id = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_display_name"></a> [display\_name](#input\_display\_name) | Friendly name of this organization. | `string` | `"Auth0 org"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of this organization. | `string` | `"auth0-org"` | no |
 

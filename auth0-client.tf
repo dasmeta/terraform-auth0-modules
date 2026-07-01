@@ -19,4 +19,5 @@ module "auth0_client" {
   refresh_token                 = each.value.refresh_token
   sso                           = each.value.sso
   organization_require_behavior = each.value.organization_require_behavior
+  token_endpoint_auth_method    = each.value.token_endpoint_auth_method
 }

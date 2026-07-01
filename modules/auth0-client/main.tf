@@ -38,6 +38,12 @@ resource "auth0_client" "my_client" {
   logo_uri     = var.logo_uri
 }
 
+resource "auth0_client_credentials" "my_client_credentials" {
+  client_id = auth0_client.my_client.id
+
+  authentication_method = var.token_endpoint_auth_method
+}
+
 data "auth0_client" "my_client" {
   client_id = auth0_client.my_client.id
 }

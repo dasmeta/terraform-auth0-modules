@@ -35,13 +35,13 @@ provider "auth0" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.0.0 |
+| <a name="requirement_auth0"></a> [auth0](#requirement\_auth0) | ~> 1.50 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.0.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
@@ -58,8 +58,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_permissions"></a> [permissions](#input\_permissions) | Permission to configure, resource\_server\_identifier must be an | <pre>list(object({<br>    name                       = string<br>    resource_server_identifier = any<br>  }))</pre> | `[]` | no |
-| <a name="input_roles"></a> [roles](#input\_roles) | Roles to create | <pre>list(object({<br>    description = string<br>    name        = string<br>  }))</pre> | n/a | yes |
+| <a name="input_permissions"></a> [permissions](#input\_permissions) | Permission to configure, resource\_server\_identifier must be an | <pre>list(object({<br/>    name                       = string<br/>    resource_server_identifier = any<br/>  }))</pre> | `[]` | no |
+| <a name="input_roles"></a> [roles](#input\_roles) | Roles to create | <pre>list(object({<br/>    description = string<br/>    name        = string<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
