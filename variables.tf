@@ -55,7 +55,7 @@ variable "clients" {
     organization_usage                                   = optional(string, null)
     organization_require_behavior                        = optional(string, null)
     custom_login_page_on                                 = optional(bool, false)
-    custom_login_page                                    = optional(string, " ")
+    custom_login_page                                    = optional(string, null)
     token_endpoint_auth_method                           = optional(string, "client_secret_post")
     grant_types                                          = optional(list(string), ["client_credentials"])
     logo_uri                                             = optional(string, null)

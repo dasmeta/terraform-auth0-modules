@@ -17,7 +17,7 @@ variable "app_type" {
 variable "custom_login_page" {
   description = "Auth0 Application custom login page."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "custom_login_page_on" {

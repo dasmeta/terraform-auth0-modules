@@ -132,7 +132,7 @@ No modules.
 | <a name="input_callbacks"></a> [callbacks](#input\_callbacks) | URLs that Auth0 may call back to after a user authenticates for the client. | `list(string)` | `[]` | no |
 | <a name="input_client_metadata"></a> [client\_metadata](#input\_client\_metadata) | Metadata associated with the client, in the form of an object with string values (max 255 chars). | `map(string)` | `{}` | no |
 | <a name="input_cross_origin_auth"></a> [cross\_origin\_auth](#input\_cross\_origin\_auth) | Whether this client can be used to make cross-origin authentication requests (true) or it is not allowed to make such requests (false). | `bool` | `false` | no |
-| <a name="input_custom_login_page"></a> [custom\_login\_page](#input\_custom\_login\_page) | Auth0 Application custom login page. | `string` | `""` | no |
+| <a name="input_custom_login_page"></a> [custom\_login\_page](#input\_custom\_login\_page) | Auth0 Application custom login page. | `string` | `null` | no |
 | <a name="input_custom_login_page_on"></a> [custom\_login\_page\_on](#input\_custom\_login\_page\_on) | Indicates whether a custom login page is to be used. | `bool` | `true` | no |
 | <a name="input_grant_types"></a> [grant\_types](#input\_grant\_types) | Types of grants that this client is authorized to use. | `list(string)` | `[]` | no |
 | <a name="input_is_first_party"></a> [is\_first\_party](#input\_is\_first\_party) | Indicates whether this client is a first-party client | `bool` | `true` | no |
