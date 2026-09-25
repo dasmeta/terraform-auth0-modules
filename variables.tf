@@ -42,6 +42,23 @@ variable "actions" {
 }
 
 // Client
+variable "custom_domains" {
+  type = list(object({
+    domain                   = string
+    type                     = optional(string, "auth0_managed_certs")
+    tls_policy               = optional(string, "recommended")
+    domain_metadata          = optional(map(string), {})
+    relying_party_identifier = optional(string, null)
+  }))
+  default     = []
+  description = "Custom domains to create in Auth0. DNS configuration and domain verification are managed externally."
+
+  validation {
+    condition     = length(var.custom_domains) == length(distinct([for custom_domain in var.custom_domains : custom_domain.domain]))
+    error_message = "Each custom domain must have a unique domain value."
+  }
+}
+
 variable "clients" {
   type = list(object({
 
