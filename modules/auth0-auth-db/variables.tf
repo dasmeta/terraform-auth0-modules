@@ -53,11 +53,11 @@ variable "custom_scripts_configuration" {
 #   default     = false
 # }
 
-# variable "disable_signup" {
-#   description = "Indicates whether to allow user sign-ups to your application."
-#   type        = bool
-#   default     = false
-# }
+variable "disable_signup" {
+  description = "Indicates whether to disable self-service sign-ups for this database connection."
+  type        = bool
+  default     = false
+}
 
 variable "password_history" {
   description = "Configuration settings for the password history that is maintained for each user to prevent the reuse of passwords."
