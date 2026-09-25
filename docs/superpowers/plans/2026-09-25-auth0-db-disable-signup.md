@@ -49,7 +49,7 @@ git commit -m "docs: plan Auth0 DB signup control"
 ### Task 2: Add the optional wrapper input and provider mapping
 
 **Files:**
-- Create: `tests/auth0-db-disable-signup.tftest.hcl`
+- Create: `modules/auth0-auth-db/tests/disable_signup.tftest.hcl`
 - Modify: `variables.tf` in the `db_connections` object type
 - Modify: `auth0-auth-db.tf` in module `auth0-auth-db`
 - Modify: `modules/auth0-auth-db/variables.tf`
@@ -57,7 +57,7 @@ git commit -m "docs: plan Auth0 DB signup control"
 
 - [ ] **Step 1: Write the mocked-provider behavior tests first**
 
-Create `tests/auth0-db-disable-signup.tftest.hcl` with `mock_provider "auth0" {}` and two `command = plan` runs. In each run, set `db_connections` to one named connection and assert the nested child resource value:
+Create `modules/auth0-auth-db/tests/disable_signup.tftest.hcl` with `mock_provider "auth0" {}` and two `command = plan` runs. Run the test from the child module with `terraform -chdir=modules/auth0-auth-db test`. It tests the child directly, so each run sets the child input (or omits it) and asserts the directly accessible resource value. Root `terraform validate`, after the root object attribute and child input are defined, separately checks the root input and module argument typing/wiring.
 
 ```hcl
 mock_provider "auth0" {}
@@ -65,12 +65,10 @@ mock_provider "auth0" {}
 run "explicit_true_reaches_connection" {
   command = plan
 
-  variables {
-    db_connections = [{ name = "signup-disabled", disable_signup = true }]
-  }
+  variables { disable_signup = true }
 
   assert {
-    condition     = module.auth0-auth-db["signup-disabled"].auth0_connection.my-database-connection.options[0].disable_signup == true
+    condition     = auth0_connection.my-database-connection.options[0].disable_signup == true
     error_message = "disable_signup=true must reach the Auth0 connection options."
   }
 }
@@ -78,12 +76,8 @@ run "explicit_true_reaches_connection" {
 run "omitted_value_defaults_false" {
   command = plan
 
-  variables {
-    db_connections = [{ name = "signup-default" }]
-  }
-
   assert {
-    condition     = module.auth0-auth-db["signup-default"].auth0_connection.my-database-connection.options[0].disable_signup == false
+    condition     = auth0_connection.my-database-connection.options[0].disable_signup == false
     error_message = "An omitted disable_signup value must resolve to false."
   }
 }
@@ -91,9 +85,9 @@ run "omitted_value_defaults_false" {
 
 - [ ] **Step 2: Run the tests before implementation**
 
-Run: `terraform test`
+Run: `terraform -chdir=modules/auth0-auth-db test`
 
-Expected: the explicit-true assertion fails because the wrapper does not yet expose/forward the field; the omitted-value case establishes the default expectation.
+Expected: the test suite fails before implementation because the child input and resource behavior are missing; do not expect only one case to fail.
 
 - [ ] **Step 3: Establish the pre-change validation baseline**
 
@@ -137,7 +131,7 @@ disable_signup = var.disable_signup
 
 - [ ] **Step 7: Verify both behavior cases**
 
-Run: `terraform test`
+Run: `terraform -chdir=modules/auth0-auth-db test`
 
 Expected: both mocked-provider assertions pass.
 
@@ -150,7 +144,7 @@ Expected: both commands exit `0`; validation reports a valid configuration.
 - [ ] **Step 9: Commit the Terraform change**
 
 ```bash
-git add variables.tf auth0-auth-db.tf modules/auth0-auth-db/variables.tf modules/auth0-auth-db/main.tf
+git add variables.tf auth0-auth-db.tf modules/auth0-auth-db/variables.tf modules/auth0-auth-db/main.tf modules/auth0-auth-db/tests/disable_signup.tftest.hcl
 git commit -m "feat: support disabling Auth0 DB signups"
 ```
 
@@ -174,7 +168,7 @@ Expected: matches in both files, with no manually added customer-specific names.
 
 - [ ] **Step 3: Run the full repository verification**
 
-Run: `terraform fmt -check -recursive && terraform validate && terraform test && pre-commit run --all-files`
+Run: `terraform fmt -check -recursive && terraform validate && terraform -chdir=modules/auth0-auth-db test && pre-commit run --all-files`
 
 Expected: all commands exit `0`.
 
@@ -192,5 +186,5 @@ Expected: no tracked changes remain; local `.terraform/` and lock-file artifacts
 
 - **Spec coverage:** Tasks 2 and 3 implement and document every approved requirement; Task 1 supplies the required module-change evidence.
 - **Compatibility:** The only new input is optional with a `false` default; no existing caller must change.
-- **Scope:** Only the root wrapper, its database-connection child module, documentation, and required evidence are touched.
+- **Scope:** Only the root wrapper, its database-connection child module, the direct child-module test at `modules/auth0-auth-db/tests/disable_signup.tftest.hcl`, documentation, and required evidence are touched. The test adds no root output to expose child internals.
 - **Placeholders and consistency:** All planned paths, Terraform names, defaults, commands, and commit scopes are explicit and consistent.

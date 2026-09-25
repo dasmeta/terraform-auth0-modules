@@ -20,17 +20,22 @@
 - `auth0-auth-db.tf`
 - `modules/auth0-auth-db/variables.tf`
 - `modules/auth0-auth-db/main.tf`
-- `tests/auth0-db-disable-signup.tftest.hcl` for mocked-provider behavior tests.
+- `modules/auth0-auth-db/tests/disable_signup.tftest.hcl` for mocked-provider
+  behavior tests against the child module directly.
 - Generated README files for the affected module documentation.
 
 ## Validation
 
 - `terraform fmt -check -recursive`
 - `terraform validate`
-- `terraform test`
+- `terraform -chdir=modules/auth0-auth-db test`
 - `pre-commit run --all-files`
 
-The native Terraform test must mock the Auth0 provider and verify that an
-explicit `disable_signup = true` reaches the child resource's
-`options.disable_signup`, and that an omitted `db_connections` field resolves
-to `false` at the resource.
+Run the native test from the child module with
+`terraform -chdir=modules/auth0-auth-db test`. It must mock the Auth0 provider
+and verify that an explicit child input `disable_signup = true` reaches the
+resource's `options.disable_signup`, and that omitting the child input resolves
+to `false` at the resource. The test addresses the child resource directly; it
+does not assume root module expressions expose child resources. Separately, run
+root `terraform validate` after defining the root `db_connections` object
+attribute and child variable to check the root input and module wiring types.
