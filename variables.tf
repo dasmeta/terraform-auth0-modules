@@ -220,6 +220,7 @@ variable "db_connections" {
     password_no_personal_info      = optional(bool, true)
     password_dictionary            = optional(any, { enable = true, dictionary = [] })
     brute_force_protection         = optional(bool, true)
+    disable_signup                 = optional(bool, false)
     custom_scripts                 = optional(any, {})
     enabled_database_customization = optional(bool, false)
     custom_scripts_configuration   = optional(any, {})

@@ -23,6 +23,7 @@ resource "auth0_connection" "my-database-connection" {
 
     custom_scripts                 = var.custom_scripts
     enabled_database_customization = var.enabled_database_customization
+    disable_signup                 = var.disable_signup
 
     configuration = var.custom_scripts_configuration
 
@@ -47,7 +48,6 @@ resource "auth0_connection" "my-database-connection" {
     #   waad_common_endpoint           = false
     #   import_mode                    = var.import_mode
     #   requires_username              = var.requires_username
-    #   disable_signup                 = var.disable_signup
 
     #   password_complexity_options {
     #     min_length = var.password_complexity_options
