@@ -14,7 +14,9 @@ object requires `domain` and defaults its certificate provisioning `type` to
 The root module will create one focused `auth0-custom-domain` child module for
 each entry. That child module will manage `auth0_custom_domain` and expose the
 domain ID, Auth0 origin domain name, status, and verification methods for
-callers or DNS automation to consume.
+callers or DNS automation to consume. Initial external DNS configuration uses
+`verification[*].methods`; `origin_domain_name` becomes available after the
+custom domain reaches `ready` status.
 
 ## Boundaries
 
@@ -30,8 +32,8 @@ callers or DNS automation to consume.
 
 `custom_domains` defaults to an empty list, so existing callers create no new
 resources. A custom domain remains pending until the required Auth0 DNS record
-is created externally; its verification data and origin domain output enable
-that next step.
+is created externally using `verification[*].methods`. Once the domain is
+`ready`, `origin_domain_name` is available for traffic routing.
 
 ## Verification
 

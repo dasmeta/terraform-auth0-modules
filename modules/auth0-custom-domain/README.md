@@ -1,6 +1,6 @@
 # auth0-custom-domain
 
-This module creates the custom domain in Auth0. DNS records and `auth0_custom_domain_verification` are managed externally; the module exposes the Auth0 origin hostname and verification values for use by DNS automation.
+This module creates the custom domain in Auth0. Initial external DNS configuration uses the records in `verification[*].methods`. After the custom domain reaches `ready` status, `origin_domain_name` becomes available for routing traffic. DNS records and `auth0_custom_domain_verification` are managed externally.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
