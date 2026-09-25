@@ -57,7 +57,15 @@ git commit -m "docs: plan Auth0 DB signup control"
 
 - [ ] **Step 1: Write the mocked-provider behavior tests first**
 
-Create `modules/auth0-auth-db/tests/disable_signup.tftest.hcl` with `mock_provider "auth0" {}` and two `command = plan` runs. Run the test from the child module with `terraform -chdir=modules/auth0-auth-db test`. It tests the child directly, so each run sets the child input (or omits it) and asserts the directly accessible resource value. Root `terraform validate`, after the root object attribute and child input are defined, separately checks the root input and module argument typing/wiring.
+Create `modules/auth0-auth-db/tests/disable_signup.tftest.hcl` with `mock_provider "auth0" {}` and two `command = plan` runs. Run the test from the child module with `terraform -chdir=modules/auth0-auth-db test`. It tests the child directly, so each run sets the child input (or omits it) and asserts the directly accessible resource value.
+
+After adding the root module argument, run this repeatable static assertion:
+
+```bash
+rg -q '^[[:space:]]*disable_signup[[:space:]]*=[[:space:]]*each\.value\.disable_signup[[:space:]]*$' auth0-auth-db.tf
+```
+
+Expected: exit code `0`, confirming the wrapper passes the per-entry value to the child input. This assertion complements the child mocked-provider behavior test: together they verify the root maps each connection value to the child input and the child maps that input to resource options. Root `terraform validate`, after the root object attribute and child input are defined, checks configuration and type validity; it does not by itself prove the value mapping.
 
 ```hcl
 mock_provider "auth0" {}
@@ -129,19 +137,25 @@ In `modules/auth0-auth-db/main.tf`, replace the commented-out setting with:
 disable_signup = var.disable_signup
 ```
 
-- [ ] **Step 7: Verify both behavior cases**
+- [ ] **Step 7: Verify the root per-entry forwarding**
+
+Run: `rg -q '^[[:space:]]*disable_signup[[:space:]]*=[[:space:]]*each\.value\.disable_signup[[:space:]]*$' auth0-auth-db.tf`
+
+Expected: exit code `0`; the wrapper forwards each connection's value to the child input.
+
+- [ ] **Step 8: Verify both child resource behavior cases**
 
 Run: `terraform -chdir=modules/auth0-auth-db test`
 
 Expected: both mocked-provider assertions pass.
 
-- [ ] **Step 8: Verify the changed configuration**
+- [ ] **Step 9: Verify the changed configuration**
 
 Run: `terraform fmt -check -recursive && terraform validate`
 
 Expected: both commands exit `0`; validation reports a valid configuration.
 
-- [ ] **Step 9: Commit the Terraform change**
+- [ ] **Step 10: Commit the Terraform change**
 
 ```bash
 git add variables.tf auth0-auth-db.tf modules/auth0-auth-db/variables.tf modules/auth0-auth-db/main.tf modules/auth0-auth-db/tests/disable_signup.tftest.hcl
@@ -168,9 +182,9 @@ Expected: matches in both files, with no manually added customer-specific names.
 
 - [ ] **Step 3: Run the full repository verification**
 
-Run: `terraform fmt -check -recursive && terraform validate && terraform -chdir=modules/auth0-auth-db test && pre-commit run --all-files`
+Run: `terraform fmt -check -recursive && terraform validate && terraform -chdir=modules/auth0-auth-db test && rg -q '^[[:space:]]*disable_signup[[:space:]]*=[[:space:]]*each\.value\.disable_signup[[:space:]]*$' auth0-auth-db.tf && pre-commit run --all-files`
 
-Expected: all commands exit `0`.
+Expected: all commands exit `0`. The static assertion verifies the root per-entry mapping, and the child-module mocked test verifies that the child input reaches the Auth0 resource. `terraform validate` checks overall configuration and type validity but does not prove the value mapping by itself.
 
 - [ ] **Step 4: Commit documentation and final verification**
 

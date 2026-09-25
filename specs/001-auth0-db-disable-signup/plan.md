@@ -29,6 +29,7 @@
 - `terraform fmt -check -recursive`
 - `terraform validate`
 - `terraform -chdir=modules/auth0-auth-db test`
+- `rg -q '^[[:space:]]*disable_signup[[:space:]]*=[[:space:]]*each\.value\.disable_signup[[:space:]]*$' auth0-auth-db.tf`
 - `pre-commit run --all-files`
 
 Run the native test from the child module with
@@ -36,6 +37,10 @@ Run the native test from the child module with
 and verify that an explicit child input `disable_signup = true` reaches the
 resource's `options.disable_signup`, and that omitting the child input resolves
 to `false` at the resource. The test addresses the child resource directly; it
-does not assume root module expressions expose child resources. Separately, run
-root `terraform validate` after defining the root `db_connections` object
-attribute and child variable to check the root input and module wiring types.
+does not assume root module expressions expose child resources. The child
+mocked-provider test verifies child-input-to-resource behavior. The
+root `rg -q` assertion verifies the per-entry root-to-child mapping. Together
+these checks prove the root value is forwarded and the child maps it to
+`options.disable_signup`. Root `terraform validate`, after defining the root
+object attribute and child variable, checks configuration and type validity;
+it does not by itself prove that value mapping.
