@@ -13,7 +13,7 @@ This module creates the custom domain in Auth0. DNS records and `auth0_custom_do
 
 | Name | Version |
 |------|---------|
-| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | 1.58.0 |
+| <a name="provider_auth0"></a> [auth0](#provider\_auth0) | ~> 1.50 |
 
 ## Modules
 
