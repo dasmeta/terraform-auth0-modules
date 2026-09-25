@@ -9,6 +9,7 @@ module "auth0-auth-db" {
   password_no_personal_info      = each.value.password_no_personal_info
   password_dictionary            = each.value.password_dictionary
   brute_force_protection         = each.value.brute_force_protection
+  disable_signup                 = each.value.disable_signup
   enabled_database_customization = each.value.enabled_database_customization
   custom_scripts_configuration   = each.value.custom_scripts_configuration
 }

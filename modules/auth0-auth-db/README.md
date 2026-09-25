@@ -52,6 +52,7 @@ No modules.
 | <a name="input_brute_force_protection"></a> [brute\_force\_protection](#input\_brute\_force\_protection) | Indicates whether to enable brute force protection, which will limit the number of signups and failed logins from a suspicious IP address. | `bool` | `true` | no |
 | <a name="input_custom_scripts"></a> [custom\_scripts](#input\_custom\_scripts) | Custom DB scripts | `any` | `{}` | no |
 | <a name="input_custom_scripts_configuration"></a> [custom\_scripts\_configuration](#input\_custom\_scripts\_configuration) | A case-sensitive map of key value pairs used as configuration variables for the custom\_script | `any` | `{}` | no |
+| <a name="input_disable_signup"></a> [disable\_signup](#input\_disable\_signup) | Indicates whether to disable self-service sign-ups for this database connection. | `bool` | `false` | no |
 | <a name="input_enabled_database_customization"></a> [enabled\_database\_customization](#input\_enabled\_database\_customization) | enabled\_database\_customization | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the connection | `string` | `"Example-Connection"` | no |
 | <a name="input_password_dictionary"></a> [password\_dictionary](#input\_password\_dictionary) | Configuration settings for the password dictionary check. | <pre>object({<br/>    enable     = bool<br/>    dictionary = list(string)<br/>  })</pre> | <pre>{<br/>  "dictionary": [],<br/>  "enable": true<br/>}</pre> | no |
