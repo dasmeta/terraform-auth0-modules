@@ -59,6 +59,12 @@ variable "disable_signup" {
   default     = false
 }
 
+variable "set_user_root_attributes" {
+  description = "Determines whether Auth0 syncs name, given_name, family_name, nickname, and picture from the external database on login."
+  type        = string
+  default     = "on_each_login"
+}
+
 variable "password_history" {
   description = "Configuration settings for the password history that is maintained for each user to prevent the reuse of passwords."
   type = object({

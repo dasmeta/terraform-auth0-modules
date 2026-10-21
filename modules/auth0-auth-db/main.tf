@@ -24,6 +24,7 @@ resource "auth0_connection" "my-database-connection" {
     custom_scripts                 = var.custom_scripts
     enabled_database_customization = var.enabled_database_customization
     disable_signup                 = var.disable_signup
+    set_user_root_attributes       = var.set_user_root_attributes
 
     configuration = var.custom_scripts_configuration
 
