@@ -59,6 +59,7 @@ No modules.
 | <a name="input_password_history"></a> [password\_history](#input\_password\_history) | Configuration settings for the password history that is maintained for each user to prevent the reuse of passwords. | <pre>object({<br/>    enable = bool<br/>    size   = number<br/>  })</pre> | <pre>{<br/>  "enable": true,<br/>  "size": 3<br/>}</pre> | no |
 | <a name="input_password_no_personal_info"></a> [password\_no\_personal\_info](#input\_password\_no\_personal\_info) | Configuration settings for the password personal info check. | `bool` | `true` | no |
 | <a name="input_password_policy"></a> [password\_policy](#input\_password\_policy) | Indicates level of password strength to enforce during authentication. | `string` | `"good"` | no |
+| <a name="input_set_user_root_attributes"></a> [set\_user\_root\_attributes](#input\_set\_user\_root\_attributes) | Determines whether Auth0 syncs name, given\_name, family\_name, nickname, and picture from the external database on login. Null preserves the provider value. | `string` | `null` | no |
 
 ## Outputs
 

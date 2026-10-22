@@ -221,6 +221,7 @@ variable "db_connections" {
     password_dictionary            = optional(any, { enable = true, dictionary = [] })
     brute_force_protection         = optional(bool, true)
     disable_signup                 = optional(bool, false)
+    set_user_root_attributes       = optional(string) # When set, controls root profile attribute synchronization; when omitted, preserves the provider value.
     custom_scripts                 = optional(any, {})
     enabled_database_customization = optional(bool, false)
     custom_scripts_configuration   = optional(any, {})
