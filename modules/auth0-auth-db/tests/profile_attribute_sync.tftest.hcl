@@ -14,15 +14,11 @@ run "explicitly_never_sync_root_attributes" {
   }
 }
 
-run "default_syncs_root_attributes_on_each_login" {
+run "default_leaves_root_attributes_unmanaged" {
   command = plan
 
-  variables {
-    name = "profile-sync-default"
-  }
-
   assert {
-    condition     = auth0_connection.my-database-connection.options[0].set_user_root_attributes == "on_each_login"
-    error_message = "The database connection must sync root attributes on each login by default."
+    condition     = var.set_user_root_attributes == null
+    error_message = "The database connection must leave root attribute synchronization unmanaged when the input is omitted."
   }
 }

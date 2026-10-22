@@ -8,18 +8,20 @@ can configure the Auth0 connection option `set_user_root_attributes`.
 ## Requirements
 
 - The child module accepts an optional string input named
-  `set_user_root_attributes`, defaulting to `"on_each_login"`.
+  `set_user_root_attributes`, defaulting to `null` so the provider/API value
+  remains unmanaged when the input is omitted.
 - The child maps that input to `auth0_connection.options`.
-- Each root `db_connections` entry accepts the same optional attribute with
-  the same default and forwards it to the child module.
-- Explicit `never_on_login` and the omitted default are verified with native
-  Terraform tests against the child module.
+- Each root `db_connections` entry accepts the same optional attribute without
+  a default and forwards it to the child module.
+- Explicit `never_on_login` and the omitted `null` value are verified with
+  native Terraform tests against the child module.
 - Generated root and child README input documentation reflects the new input.
 
 ## Compatibility
 
-The interface is additive. Omitting the input preserves `on_each_login` and
-does not change resource addresses or existing required inputs.
+The interface is additive. Omitting the input preserves the existing
+provider/API value and does not change resource addresses or existing required
+inputs.
 
 ## Governance record
 

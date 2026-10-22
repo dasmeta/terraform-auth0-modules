@@ -60,9 +60,9 @@ variable "disable_signup" {
 }
 
 variable "set_user_root_attributes" {
-  description = "Determines whether Auth0 syncs name, given_name, family_name, nickname, and picture from the external database on login."
+  description = "Determines whether Auth0 syncs name, given_name, family_name, nickname, and picture from the external database on login. Null preserves the provider value."
   type        = string
-  default     = "on_each_login"
+  default     = null
 }
 
 variable "password_history" {

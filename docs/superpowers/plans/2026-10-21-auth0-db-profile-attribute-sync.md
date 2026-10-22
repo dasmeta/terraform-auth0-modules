@@ -67,7 +67,7 @@ Expected: FAIL because `set_user_root_attributes` is not yet declared or mapped 
 Add the following field adjacent to `disable_signup` in the `db_connections` object:
 
 ```hcl
-set_user_root_attributes = optional(string, "on_each_login") # Sync root profile attributes on each login, first login, or never.
+set_user_root_attributes = optional(string) # When set, controls root profile attribute synchronization; when omitted, preserves the provider value.
 ```
 
 - [ ] **Step 2: Forward the per-connection value**
@@ -97,9 +97,9 @@ Add this variable after `disable_signup`:
 
 ```hcl
 variable "set_user_root_attributes" {
-  description = "Determines whether Auth0 syncs name, given_name, family_name, nickname, and picture from the external database on login."
+  description = "Determines whether Auth0 syncs name, given_name, family_name, nickname, and picture from the external database on login. Null preserves the provider value."
   type        = string
-  default     = "on_each_login"
+  default     = null
 }
 ```
 
@@ -111,21 +111,17 @@ Add this argument in the resource `options` block adjacent to `disable_signup`:
 set_user_root_attributes = var.set_user_root_attributes
 ```
 
-- [ ] **Step 3: Add the default-behavior test**
+- [ ] **Step 3: Add the unmanaged-default test**
 
 Append this run to `modules/auth0-auth-db/tests/profile_attribute_sync.tftest.hcl`:
 
 ```hcl
-run "default_syncs_root_attributes_on_each_login" {
+run "default_leaves_root_attributes_unmanaged" {
   command = plan
 
-  variables {
-    name = "profile-sync-default"
-  }
-
   assert {
-    condition     = auth0_connection.my-database-connection.options[0].set_user_root_attributes == "on_each_login"
-    error_message = "The database connection must sync root attributes on each login by default."
+    condition     = var.set_user_root_attributes == null
+    error_message = "The database connection must leave root attribute synchronization unmanaged when the input is omitted."
   }
 }
 ```
@@ -152,7 +148,7 @@ Expected: Terraform installs local child module references and selects an Auth0 
 
 Run: `pre-commit run terraform_docs --files README.md modules/auth0-auth-db/README.md`
 
-Expected: generated input tables contain `set_user_root_attributes` at the root and child levels.
+Expected: generated input tables contain `set_user_root_attributes` at the root and child levels, with no root default and a `null` child default.
 
 - [ ] **Step 3: Run all validations**
 

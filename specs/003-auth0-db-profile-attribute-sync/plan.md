@@ -9,10 +9,11 @@ the root-to-child forwarding pattern and native child-module tests.
 
 ## Design and compatibility
 
-Add one optional string with default `"on_each_login"` at both interface
-levels, then forward it unchanged. This preserves the narrow wrapper rather
-than exposing a generic provider-options pass-through. It is additive and not
-a material interface widening or a breaking change.
+Add one optional string without a root default and with a child default of
+`null`, then forward it unchanged. This preserves the narrow wrapper and leaves
+the provider-computed value unmanaged unless a caller explicitly configures it,
+rather than exposing a generic provider-options pass-through. It is additive
+and not a material interface widening or a breaking change.
 
 ## Provider capability
 
