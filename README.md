@@ -39,6 +39,80 @@ clients = {
 `client` is the name of the client which is already managed by this module.
 `output` is the name of the output field of the client. The value of the secret is read from this output.
 
+## Binding actions to triggers
+
+Every action with `deploy = true` is bound to the trigger in `supported_triggers.id`.
+The module creates one `auth0_trigger_actions` resource per trigger, keyed by the trigger id
+(for example `auth0_trigger_actions.bindings["post-login"]`). That resource owns the full,
+ordered list of actions of its trigger, as described in the
+[provider docs](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/trigger_actions).
+Actions with `deploy = false` are created but not bound.
+
+Use the optional `trigger_order` (a whole number from 0 to 999999999) to set the order in which
+the actions of one trigger run:
+
+```
+actions = {
+  "Deny blocked users" = {
+    code               = file("${path.module}/actions-code/deny-blocked-users.js")
+    name               = "Deny blocked users"
+    supported_triggers = { id = "post-login", version = "v3" }
+    deploy             = true
+    trigger_order      = 1
+  }
+  "Add custom claims" = {
+    code               = file("${path.module}/actions-code/add-custom-claims.js")
+    name               = "Add custom claims"
+    supported_triggers = { id = "post-login", version = "v3" }
+    deploy             = true
+    trigger_order      = 2
+  }
+}
+```
+
+Actions run in ascending `trigger_order`. Actions without `trigger_order` run after the ordered
+ones. Actions with the same `trigger_order`, and actions without one, are ordered by name.
+
+### Upgrading from v1.10.0 or earlier
+
+Up to v1.10.0 the module created one `auth0_trigger_actions.trigger_binding["<action name>"]`
+per deployed action. Because that resource owns all bindings of its trigger, two deployed
+actions on the same trigger overwrote each other on every apply, and one of them ended up
+unbound.
+
+On the first plan after the upgrade, expect for each trigger with a deployed action one
+`create` of `auth0_trigger_actions.bindings["<trigger>"]`, and for each deployed action one
+"will no longer be managed by Terraform, but will not be destroyed" entry for the old
+address, followed by a "Some objects will no longer be managed by Terraform" warning.
+`0 to destroy` is expected. For example, with one `post-login` and one `post-change-password`
+action:
+
+```
+  # module.auth0.auth0_trigger_actions.bindings["post-change-password"] will be created
+  + resource "auth0_trigger_actions" "bindings" { ... }
+
+  # module.auth0.auth0_trigger_actions.bindings["post-login"] will be created
+  + resource "auth0_trigger_actions" "bindings" { ... }
+
+ # module.auth0.auth0_trigger_actions.trigger_binding["Alpha"] will no longer be managed by Terraform, but will not be destroyed
+ # (destroy = false is set in the configuration)
+
+ # module.auth0.auth0_trigger_actions.trigger_binding["Password changed"] will no longer be managed by Terraform, but will not be destroyed
+ # (destroy = false is set in the configuration)
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+```
+
+The old addresses are dropped from state with a `removed` block (`destroy = false`) instead of
+being destroyed. Destroying them would send an empty binding list for the trigger, and since the
+old and new resources do not depend on each other, that could happen after the new binding was
+written and leave the trigger with no actions. Creating the new resource replaces the trigger's
+binding list in a single API call, so the actions stay bound during the apply. `moved` blocks
+are not possible here because the old keys are the callers' action names.
+
+Do not set `deploy = false` on the only deployed action of a trigger in the same apply as the
+upgrade: its old binding would be forgotten instead of removed. Upgrade first, then change it.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -76,13 +150,13 @@ clients = {
 |------|------|
 | [auth0_client_grant.my_client_grant](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/client_grant) | resource |
 | [auth0_prompt.my_prompt](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/prompt) | resource |
-| [auth0_trigger_actions.trigger_binding](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/trigger_actions) | resource |
+| [auth0_trigger_actions.bindings](https://registry.terraform.io/providers/auth0/auth0/latest/docs/resources/trigger_actions) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_actions"></a> [actions](#input\_actions) | Actions are secure, tenant-specific, versioned functions written in Node.js that execute at certain points during the Auth0 runtime. Actions are used to customize and extend Auth0's capabilities with custom logic. | <pre>list(object({<br/>    name    = string<br/>    code    = string<br/>    runtime = optional(string, "node16")<br/>    supported_triggers = optional(any, {<br/>      id      = "post-change-password"<br/>      version = "v2"<br/>    })<br/>    dependencies = optional(list(any), [])<br/>    deploy       = optional(bool, false)<br/>    client_secrets = optional(list(object({<br/>      name   = string<br/>      client = string<br/>      output = string<br/>    })), [])<br/>    secrets = optional(list(object({<br/>      name  = string<br/>      value = string<br/>    })), [])<br/>  }))</pre> | `[]` | no |
+| <a name="input_actions"></a> [actions](#input\_actions) | Actions are secure, tenant-specific, versioned functions written in Node.js that execute at certain points during the Auth0 runtime. Actions are used to customize and extend Auth0's capabilities with custom logic. Deployed actions (`deploy = true`) are bound to their trigger (`supported_triggers.id`) with one binding per trigger. They run in ascending `trigger_order`; actions without `trigger_order` run after the ordered ones, and ties are ordered by name. | <pre>list(object({<br/>    name    = string<br/>    code    = string<br/>    runtime = optional(string, "node16")<br/>    supported_triggers = optional(any, {<br/>      id      = "post-change-password"<br/>      version = "v2"<br/>    })<br/>    dependencies = optional(list(any), [])<br/>    deploy       = optional(bool, false)<br/>    client_secrets = optional(list(object({<br/>      name   = string<br/>      client = string<br/>      output = string<br/>    })), [])<br/>    secrets = optional(list(object({<br/>      name  = string<br/>      value = string<br/>    })), [])<br/>    trigger_order = optional(number)<br/>  }))</pre> | `[]` | no |
 | <a name="input_apis"></a> [apis](#input\_apis) | With this resource, you can set up APIs that can be consumed from your authorized applications. | <pre>list(object({<br/>    name                                            = string<br/>    scopes                                          = list(any)<br/>    identifier                                      = string<br/>    enforce_policies                                = optional(bool, true)<br/>    signing_alg                                     = optional(string, "RS256")<br/>    skip_consent_for_verifiable_first_party_clients = optional(bool, true)<br/>    token_lifetime                                  = optional(number, 86400)<br/>    token_lifetime_for_web                          = optional(number, 7200)<br/>    token_dialect                                   = optional(string, null)<br/>    allow_offline_access                            = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_client-id"></a> [client-id](#input\_client-id) | Auth0 client id | `string` | n/a | yes |
 | <a name="input_client-secret"></a> [client-secret](#input\_client-secret) | Auth0 client secret | `string` | n/a | yes |

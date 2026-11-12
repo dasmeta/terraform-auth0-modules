@@ -49,6 +49,24 @@ locals {
           }
         ]
       }
+      # Deployed actions are bound to their trigger in ascending trigger_order.
+      # Actions without trigger_order run after the ordered ones; ties sort by name.
+      "Deny blocked users" = {
+        code               = file("${path.module}/actions-code/deny-blocked-users.js")
+        name               = "Deny blocked users"
+        runtime            = "node22"
+        supported_triggers = { id = "post-login", version = "v3" }
+        deploy             = true
+        trigger_order      = 1
+      }
+      "Add custom claims" = {
+        code               = file("${path.module}/actions-code/add-custom-claims.js")
+        name               = "Add custom claims"
+        runtime            = "node22"
+        supported_triggers = { id = "post-login", version = "v3" }
+        deploy             = true
+        trigger_order      = 2
+      }
     }
     roles = {
       "Intermediary Role" = {

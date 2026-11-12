@@ -36,9 +36,19 @@ variable "actions" {
       name  = string
       value = string
     })), [])
+    trigger_order = optional(number)
   }))
   default     = []
-  description = "Actions are secure, tenant-specific, versioned functions written in Node.js that execute at certain points during the Auth0 runtime. Actions are used to customize and extend Auth0's capabilities with custom logic."
+  description = "Actions are secure, tenant-specific, versioned functions written in Node.js that execute at certain points during the Auth0 runtime. Actions are used to customize and extend Auth0's capabilities with custom logic. Deployed actions (`deploy = true`) are bound to their trigger (`supported_triggers.id`) with one binding per trigger. They run in ascending `trigger_order`; actions without `trigger_order` run after the ordered ones, and ties are ordered by name."
+
+  validation {
+    condition = alltrue([
+      for action in var.actions : action.trigger_order == null ? true : (
+        action.trigger_order >= 0 && action.trigger_order < 1000000000 && floor(action.trigger_order) == action.trigger_order
+      )
+    ])
+    error_message = "trigger_order must be a whole number from 0 to 999999999."
+  }
 }
 
 // Client
